@@ -1,7 +1,9 @@
+import BannerSection from "@/components/modules/home/BannerSection";
+
 export default function Home() {
   return (
     <>
-      <h1>Home</h1>
+      <BannerSection />
     </>
   );
 }

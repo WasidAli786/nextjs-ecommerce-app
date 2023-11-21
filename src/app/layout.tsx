@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
+import Layout from "@/components/layout/Layout";
+import ReactQueryProvider from "@/config/provider/ReactQueryProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -21,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        {children}
+        <ReactQueryProvider>
+          <Layout>{children}</Layout>
+        </ReactQueryProvider>
         <Toaster />
       </body>
     </html>

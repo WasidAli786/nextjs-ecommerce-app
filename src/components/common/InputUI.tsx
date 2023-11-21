@@ -13,6 +13,8 @@ const InputUI = ({
   variant,
   color,
   size,
+  startContent,
+  endContent,
   register,
   required,
   errors,
@@ -23,11 +25,13 @@ const InputUI = ({
   return (
     <>
       <Input
-        label={label ?? "Label here"}
+        label={label ?? ""}
         placeholder={placeholder ?? "Enter placeholder"}
         size={size ?? "md"}
         variant={variant ?? "faded"}
         color={errors?.[name] ? "danger" : color ? color : "primary"}
+        startContent={startContent}
+        endContent={endContent}
         isInvalid={errors?.[name] ? true : false}
         errorMessage={errors?.[name] && String(errors[name]?.message)}
         {...register(name as never, {

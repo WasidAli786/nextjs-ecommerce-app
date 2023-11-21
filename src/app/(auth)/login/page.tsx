@@ -43,7 +43,7 @@ const Login = () => {
       cookieUtils.setCookie("token", response.token);
       setStorageItem("user", response);
       setUser(response);
-      router.push("/admin");
+      router.push("/");
       successToast("Login successfully!");
     } catch (error) {
       errorToast(error as any);
@@ -51,29 +51,31 @@ const Login = () => {
   };
   return (
     <>
-      <Card className="auth_container p-5 border" shadow="none">
-        <h1 className="text-2xl font-semibold">Login</h1>
-        <form className="space-y-5 mt-5" onSubmit={handleSubmit(handleLogin)}>
-          <InputUI
-            name="username"
-            label="Username"
-            placeholder="Enter username"
-            register={register}
-            errors={errors}
-          />
-          <InputUI
-            name="password"
-            label="Password"
-            placeholder="Enter password"
-            type="password"
-            register={register}
-            errors={errors}
-          />
-          <ButtonUI type="submit" fullWidth isLoading={isSubmitting}>
-            Login
-          </ButtonUI>
-        </form>
-      </Card>
+      <div className="auth_container py-10">
+        <Card className="p-5 border" shadow="none">
+          <h1 className="text-2xl font-semibold">Login</h1>
+          <form className="space-y-5 mt-5" onSubmit={handleSubmit(handleLogin)}>
+            <InputUI
+              name="username"
+              label="Username"
+              placeholder="Enter username"
+              register={register}
+              errors={errors}
+            />
+            <InputUI
+              name="password"
+              label="Password"
+              placeholder="Enter password"
+              type="password"
+              register={register}
+              errors={errors}
+            />
+            <ButtonUI type="submit" fullWidth isLoading={isSubmitting}>
+              Login
+            </ButtonUI>
+          </form>
+        </Card>
+      </div>
     </>
   );
 };

@@ -31,7 +31,6 @@ body {
   position: relative;
   transition: 0.4s;
   line-height: 36px;
-  color: white;
 }
 .list_items > li:hover {
   color: var(--primary);
