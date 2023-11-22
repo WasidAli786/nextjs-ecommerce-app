@@ -21,22 +21,29 @@ import Link from "next/link";
 import { useStore } from "@/store/store";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import cookieUtils from "@/utils/cookieUtils";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import SelectUI from "../common/SelectUI";
 
 const Navbar = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register } = useForm();
   const router = useRouter();
+  const params = useParams();
   const { user } = useStore();
   const { removeStorageItem } = useLocalStorage();
 
-  // const { data, isLoading, isFetching } = useQuery({
-  //   queryKey: ["categories"],
-  //   queryFn: (): Promise<ICategoryProps> => ProductService.getAllCategories(),
-  // });
+  const selectedCategory = params?.slug && params.slug[0];
+
+  const { data } = useQuery({
+    queryKey: ["categories"],
+    queryFn: (): Promise<ICategoryProps> => ProductService.getAllCategories(),
+    select: (data) =>
+      data?.map((items) => {
+        return {
+          label: items,
+          value: items,
+        };
+      }),
+  });
 
   //* handle logout functionality
   const handleLogout = () => {
@@ -44,15 +51,28 @@ const Navbar = () => {
     removeStorageItem("user");
     router.push("/login");
   };
+
+  const handleCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+    router.push(`/product/category/${e.target.value}`);
+  };
   return (
     <>
       <nav className="w-full fixed top-0 shadow bg-white z-50">
         <div className="container h-[70px] flex items-center justify-between">
-          <h1 className="text-4xl font-black">
-            Pick<span className="text-primary">Bazaar</span>
-          </h1>
+          <Link href="/">
+            <h1 className="text-4xl font-black">
+              Pick<span className="text-primary">Bazaar</span>
+            </h1>
+          </Link>
           <div className="flex items-center gap-4">
-            <div className="w-80">
+            <div className="w-44">
+              <SelectUI
+                options={data}
+                selectedKey={selectedCategory}
+                onChange={handleCategory}
+              />
+            </div>
+            <div className="w-[400px]">
               <InputUI
                 name="product"
                 placeholder="Search product"
@@ -75,6 +95,7 @@ const Navbar = () => {
                       as="button"
                       className="transition-transform"
                       src={user?.image}
+                      size="sm"
                     />
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
@@ -95,19 +116,10 @@ const Navbar = () => {
               </>
             ) : (
               <Link href="/login">
-                <ButtonUI>Sign in</ButtonUI>
+                <ButtonUI size="lg">Sign in</ButtonUI>
               </Link>
             )}
           </div>
-          {/* <div className="hidden md:block">
-            <ul className="list_items flex items-center space-x-6">
-              {navData.map((items, index) => (
-                <li key={index} className="text-lg">
-                  {items?.title}
-                </li>
-              ))}
-            </ul>
-          </div> */}
         </div>
       </nav>
     </>

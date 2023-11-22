@@ -1,8 +1,8 @@
+import { type Metadata } from "next";
 import ProductCard from "@/components/modules/product/ProductCard";
 import ProductPagination from "@/components/modules/product/ProductPagination";
 import ProductService from "@/config/api/product.api";
 import { IProductProps } from "@/utils/types";
-import { type Metadata } from "next";
 
 interface IProductDataProps {
   products: IProductProps[];
