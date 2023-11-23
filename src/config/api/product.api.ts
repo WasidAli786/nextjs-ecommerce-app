@@ -18,5 +18,8 @@ const ProductService = {
   getCategoryProduct: (category: string) => {
     return get(`${GET_CATEGORY_PRODUCT_ENDPOINT}/${category}`);
   },
+  getProductBySearch: (title: string) => {
+    return get(`${GET_ALL_PRODUCTS_ENDPOINT}/search?q=${title}`);
+  },
 };
 export default ProductService;

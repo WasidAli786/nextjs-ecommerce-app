@@ -31,6 +31,14 @@ export async function generateMetadata({
     title: products[0].title,
     description: products[0].description,
     openGraph: {
+      title: products[0].title,
+      description: products[0].description,
+      images: products[0]?.thumbnail,
+      type: "website",
+    },
+    twitter: {
+      title: products[0].title,
+      description: products[0].description,
       images: products[0]?.thumbnail,
     },
   };

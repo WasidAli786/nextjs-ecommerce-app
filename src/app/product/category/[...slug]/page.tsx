@@ -24,7 +24,7 @@ export default async function Category({
     <>
       <div className="container flex">
         <div className="fixed w-72 bg-white p-5">
-          <h1 className="font-bold">Choose Categories</h1>
+          <h1 className="text-lg font-bold mb-3">Choose Categories</h1>
           <ProductCategories
             categories={categories}
             categorySlug={categorySlug}

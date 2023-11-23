@@ -20,7 +20,7 @@ const ProductCategories = ({
   };
   return (
     <>
-      <ScrollShadow hideScrollBar>
+      <ScrollShadow hideScrollBar className="h-[60vh]">
         <RadioGroup onChange={handleCategoryChange} defaultValue={categorySlug}>
           {categories.map((items) => (
             <Radio value={items} key={items}>

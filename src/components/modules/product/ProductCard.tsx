@@ -21,7 +21,7 @@ const ProductCard = ({ items }: { items: IProductProps }) => {
             <Chip color="primary">{items?.category}</Chip>
             <h3>Price: ${items?.price}</h3>
           </div>
-          <Link href={`/product/${slugify(items?.title)}/${items?.id}`}>
+          <Link href={`/product/${items?.title}/${items?.id}`}>
             <h4 className="font-bold text-large">{items?.title}</h4>
           </Link>
           <ButtonUI fullWidth>Add to cart</ButtonUI>

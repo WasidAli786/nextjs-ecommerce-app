@@ -1,10 +1,11 @@
 import { Input, type InputProps } from "@nextui-org/input";
-import { UseFormRegister, FieldErrors } from "react-hook-form";
+import { FieldErrors } from "react-hook-form";
 
-// interface FieldsProps extends InputProps {
-//   register: UseFormRegister<ContactFormProps>;
-//   errors?: FieldErrors;
-// }
+interface IFieldProps extends InputProps {
+  // register: UseFormRegister<ContactFormProps>;
+  register: any;
+  errors?: FieldErrors;
+}
 
 const InputUI = ({
   name,
@@ -18,7 +19,8 @@ const InputUI = ({
   register,
   required,
   errors,
-}: any) => {
+  className,
+}: IFieldProps) => {
   if (!name) {
     return null;
   }
@@ -32,6 +34,7 @@ const InputUI = ({
         color={errors?.[name] ? "danger" : color ? color : "primary"}
         startContent={startContent}
         endContent={endContent}
+        className={`w-full ${className ?? ""}`}
         isInvalid={errors?.[name] ? true : false}
         errorMessage={errors?.[name] && String(errors[name]?.message)}
         {...register(name as never, {
