@@ -15,6 +15,7 @@ const ButtonUI = ({
   type,
   isLoading,
   fullWidth,
+  disabled,
 }: ButtonProps) => {
   return (
     <>
@@ -30,6 +31,7 @@ const ButtonUI = ({
         type={type ?? "button"}
         isLoading={isLoading}
         fullWidth={fullWidth}
+        disabled={disabled}
       >
         {children}
       </Button>

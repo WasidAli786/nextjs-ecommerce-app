@@ -1,4 +1,3 @@
-import ButtonUI from "@/components/common/ButtonUI";
 import NextImage from "@/components/common/NextImage";
 import { slugify } from "@/utils/slugify";
 import { IProductProps } from "@/utils/types";
@@ -9,22 +8,22 @@ const ProductCard = ({ items }: { items: IProductProps }) => {
   return (
     <>
       <Card>
-        <CardBody className="relative h-80 w-full">
-          <NextImage
-            src={items?.thumbnail}
-            alt={items?.title}
-            className="object-cover rounded-tr-xl rounded-tl-xl"
-          />
-        </CardBody>
-        <CardFooter className="flex flex-col items-start space-y-3">
-          <div className="flex items-center justify-between w-full">
-            <Chip color="primary">{items?.category}</Chip>
-            <h3>Price: ${items?.price}</h3>
+        <div>
+          <div className="relative h-60 w-full">
+            <NextImage
+              src={items?.thumbnail}
+              alt={items?.title}
+              className="object-cover rounded-tr-xl rounded-tl-xl"
+            />
           </div>
+        </div>
+        <CardFooter className="flex flex-col items-start space-y-1">
           <Link href={`/product/${items?.title}/${items?.id}`}>
-            <h4 className="font-bold text-large">{items?.title}</h4>
+            <h4 className="font-bold">{items?.title}</h4>
           </Link>
-          <ButtonUI fullWidth>Add to cart</ButtonUI>
+          <div className="flex items-center justify-between w-full">
+            <h3 className="text-sm text-gray-500">${items?.price}</h3>
+          </div>
         </CardFooter>
       </Card>
     </>

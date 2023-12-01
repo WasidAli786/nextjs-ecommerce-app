@@ -11,6 +11,7 @@ export interface IProductProps {
   thumbnail: string;
   category: string;
   price: number;
+  discountPercentage: number;
 }
 
 export interface ICategoryProps {

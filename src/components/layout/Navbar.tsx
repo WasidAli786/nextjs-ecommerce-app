@@ -72,7 +72,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="w-full fixed top-0 shadow bg-white z-50">
+      <nav className="w-full fixed top-0 shadow bg-white z-[999]">
         <div className="container h-[70px] flex items-center justify-between">
           <Link href="/">
             <h1 className="text-4xl font-black">
