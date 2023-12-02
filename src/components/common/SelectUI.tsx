@@ -36,16 +36,15 @@ const SelectUI = ({
         label={label ?? ""}
         placeholder={placeholder ?? ""}
         size={size ?? "md"}
-        onChange={onChange}
-        selectedKeys={[selectedKeys]}
+        onSelectionChange={onChange}
         variant={variant ?? "faded"}
         color={errors?.[name] ? "danger" : color ? color : "primary"}
         className={`w-full ${className ?? ""}`}
         isInvalid={errors?.[name] ? true : false}
         errorMessage={errors?.[name] && String(errors[name]?.message)}
-        // {...register(name as never, {
-        //   required: required === false ? false : "This field is required",
-        // })}
+        {...register(name as never, {
+          required: required === false ? false : "This field is required",
+        })}
       >
         {options?.map((items) => (
           <SelectItem key={items.value} value={items.value}>

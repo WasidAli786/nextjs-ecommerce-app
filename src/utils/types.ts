@@ -9,11 +9,13 @@ export interface IProductProps {
   title: string;
   description: string;
   thumbnail: string;
+  images?: string[];
   category: string;
   price: number;
   discountPercentage: number;
+  rating?: string;
 }
 
 export interface ICategoryProps {
-  categories: string[];
+  data: string[];
 }

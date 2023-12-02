@@ -24,7 +24,7 @@ const ProductListing = () => {
     return response;
   }
 
-  const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
+  const { data, fetchNextPage, isFetchingNextPage, hasNextPage, isFetching } =
     useInfiniteQuery({
       queryKey: ["products"],
       queryFn: getAllProducts,
@@ -64,11 +64,7 @@ const ProductListing = () => {
           isLoading={isFetchingNextPage}
           onClick={() => fetchNextPage()}
         >
-          {isFetchingNextPage
-            ? "Loading..."
-            : hasNextPage
-            ? "Load More"
-            : "End Limit"}
+          {hasNextPage ? "Load More" : "End Limit"}
         </ButtonUI> */}
       </div>
     </>

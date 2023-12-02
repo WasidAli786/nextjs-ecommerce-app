@@ -12,7 +12,6 @@ import {
 } from "@nextui-org/react";
 import { ShoppingCart } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { ICategoryProps } from "@/utils/types";
 import ProductService from "@/config/api/product.api";
 import InputUI from "../common/InputUI";
 import { useForm } from "react-hook-form";
@@ -26,20 +25,24 @@ import SelectUI from "../common/SelectUI";
 import { searchQuery } from "@/utils/searchQuery";
 
 const Navbar = () => {
-  const { register, handleSubmit } = useForm();
   const router = useRouter();
   const params = useParams();
   const query = searchQuery();
   const { user } = useStore();
   const { removeStorageItem } = useLocalStorage();
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      title: query.get("title"),
+    },
+  });
 
   const selectedCategory = params?.slug && params.slug[0];
 
   const { data } = useQuery({
     queryKey: ["categories"],
-    queryFn: (): Promise<ICategoryProps> => ProductService.getAllCategories(),
+    queryFn: () => ProductService.getAllCategories(),
     select: (data) =>
-      data?.map((items) => {
+      data?.map((items: any) => {
         return {
           label: items,
           value: items,
@@ -54,11 +57,12 @@ const Navbar = () => {
     router.push("/login");
   };
 
-  const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    router.push(`/product/category/${e.target.value}`);
+  const handleCategory = (e: any) => {
+    const value = e?.currentKey;
+    router.push(`/product/category/${value}`);
   };
 
-  const handleSearch = (values) => {
+  const handleSearch = (values: any) => {
     const title = values.title;
     if (title === "") {
       query.delete("title");
@@ -67,8 +71,7 @@ const Navbar = () => {
     } else {
       query.append("title", title);
     }
-    const newPathname = `product?${query}`;
-    router.push(newPathname);
+    router.push(`/product/search?${query}`);
   };
   return (
     <>
@@ -90,6 +93,7 @@ const Navbar = () => {
                 selectedKeys={selectedCategory}
                 onChange={handleCategory}
                 register={register}
+                required={false}
               />
             </div>
             <div className="w-[400px]">

@@ -1,7 +1,7 @@
 import NextImage from "@/components/common/NextImage";
 import { slugify } from "@/utils/slugify";
 import { IProductProps } from "@/utils/types";
-import { Card, CardFooter, CardBody, Chip } from "@nextui-org/react";
+import { Card, CardFooter } from "@nextui-org/react";
 import Link from "next/link";
 
 const ProductCard = ({ items }: { items: IProductProps }) => {
@@ -18,7 +18,7 @@ const ProductCard = ({ items }: { items: IProductProps }) => {
           </div>
         </div>
         <CardFooter className="flex flex-col items-start space-y-1">
-          <Link href={`/product/${items?.title}/${items?.id}`}>
+          <Link href={`/product/${slugify(items?.title)}/${items?.id}`}>
             <h4 className="font-bold">{items?.title}</h4>
           </Link>
           <div className="flex items-center justify-between w-full">
